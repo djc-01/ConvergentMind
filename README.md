@@ -1,6 +1,11 @@
 # ConvergentMind
 
-ConvergentMind is a browser-first multimodal agent demo for experimenting with agents that can:
+[![CI](https://github.com/Chocologician/ConvergentMind/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Chocologician/ConvergentMind/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/convergentmind.svg)](https://pypi.org/project/convergentmind/)
+[![Python](https://img.shields.io/badge/python-3.13%2B-3776AB.svg)](https://github.com/Chocologician/ConvergentMind)
+[![License](https://img.shields.io/github/license/Chocologician/ConvergentMind.svg)](LICENSE)
+
+ConvergentMind is a small, hackable, local-first research platform for browser-first multimodal agents. It gives you a clear `observe -> plan -> act -> verify` loop that can combine:
 
 - observe a web page
 - observe the outside world through a camera or video stream
@@ -9,7 +14,17 @@ ConvergentMind is a browser-first multimodal agent demo for experimenting with a
 - verify whether the action actually helped
 - record the full run for replay and debugging
 
-This repository is intentionally scoped as a practical prototype, not a finished product. The goal is to provide a clean, hackable base for building a richer "web + world" agent.
+The project is intentionally lightweight, but it is built to be extended, tested, and replayed like a real tool instead of a one-off demo.
+
+## 30-second value
+
+ConvergentMind is useful if you are:
+
+- building browser agents that need more than page-only perception
+- exploring multimodal planning with browser state plus camera or video context
+- teaching or debugging explicit agent loops without hiding the control flow behind a large framework
+
+It focuses on a gap that many agent repos skip: connecting browser-state reasoning with a second "world" channel while keeping the pipeline easy to inspect and replay.
 
 ## Why this project exists
 
@@ -19,6 +34,12 @@ Most browser agents can only see inside the page. Most vision demos can only des
 - it treats camera input as another perception channel
 - it keeps the agent loop explicit: observe -> plan -> act -> verify
 - it stays small enough to understand and extend
+
+## Why it matters
+
+- It provides a practical base layer between browser-agent tooling and broader multimodal agent research.
+- It is a good teaching and experimentation surface for observation, planning, verification, and replay.
+- The offline demo path keeps the full workflow reproducible even when model access is unavailable or unstable.
 
 ## What works today
 
@@ -38,14 +59,30 @@ Most browser agents can only see inside the page. Most vision demos can only des
 - online planning depends on your configured provider exposing a usable text-capable model
 - the current demo focuses on clear architecture and iteration speed over production hardening
 
+## Project status
+
+Stable today:
+
+- local browser observation and action execution
+- local replay artifacts for inspection and debugging
+- optional camera or stream snapshots per step
+- offline demo mode for no-model smoke tests
+
+Next up:
+
+- richer world summaries from camera input
+- stronger verification and failure recovery
+- better replay and inspection UX
+
+Contributions are especially welcome in tests, docs, diagnostics, replay artifacts, and planner/verifier quality.
+
 ## Quick start
 
-Use `py -3.13` on this machine instead of bare `python`.
+Use `py -3.13` on this machine instead of bare `python`. On macOS or Linux, replace `py -3.13` with `python3.13` or your preferred Python launcher.
 
 ```powershell
 cd path\to\convergentmind
-py -3.13 -m pip install -r requirements.txt
-py -3.13 -m pip install -e .
+py -3.13 -m pip install -e ".[dev]"
 py -3.13 -m playwright install chromium
 Copy-Item .env.example .env
 ```
@@ -92,6 +129,37 @@ Check whether your current environment is ready for online model-backed runs:
 py -3.13 -m convergentmind.cli doctor --camera-source 0
 ```
 
+## Example run output
+
+Successful offline runs should look roughly like this:
+
+```text
+Run finished with status: completed
+Run ID: 20260601-224500-demo
+Artifacts: runs/20260601-224500-demo
+```
+
+Typical artifacts:
+
+```text
+runs/<run-id>/
+  browser/
+  camera/
+  steps/
+  summary.json
+```
+
+Example `summary.json` shape:
+
+```json
+{
+  "status": "completed",
+  "goal": "Fill the form and submit it.",
+  "step_count": 4,
+  "final_result": "Submitted the form successfully."
+}
+```
+
 ## Repository structure
 
 ```text
@@ -132,6 +200,12 @@ Key modules:
 
 See [examples/README.md](examples/README.md) for runnable flows and [examples/sample_goals.md](examples/sample_goals.md) for goal ideas.
 
+## Releases and packaging
+
+- install locally with `pip install -e ".[dev]"`
+- build release artifacts with `py -3.13 -m build`
+- follow [RELEASING.md](RELEASING.md) for TestPyPI, PyPI, and GitHub release steps
+
 ## Roadmap
 
 See [ROADMAP.md](ROADMAP.md) for the planned evolution of this project.
@@ -149,3 +223,9 @@ If Playwright Chromium is not installed, the browser-observer test may be skippe
 - allowed domains are restricted by default to the start URL domain
 - camera frames are context only and do not trigger physical-world actions
 - this demo should not be used for payments, account deletion, or sensitive real-world operations
+
+## Community
+
+- use GitHub Discussions for questions, feedback, and roadmap ideas
+- use Issues for reproducible bugs and scoped feature requests
+- see [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidance

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usage questions and design discussion
+    url: https://github.com/Chocologician/ConvergentMind/discussions
+    about: Use GitHub Discussions for roadmap ideas, usage feedback, and open-ended design questions.

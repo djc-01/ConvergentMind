@@ -2,7 +2,7 @@
 
 Thanks for considering a contribution.
 
-This project is still an early prototype, so the most valuable contributions are the ones that improve clarity, reliability, and extensibility without making the codebase much heavier.
+This project is still early, so the most valuable contributions are the ones that improve clarity, reliability, and extensibility without making the codebase much heavier.
 
 ## Good first contribution areas
 
@@ -16,8 +16,7 @@ This project is still an early prototype, so the most valuable contributions are
 
 ```powershell
 cd path\to\convergentmind
-py -3.13 -m pip install -r requirements.txt
-py -3.13 -m pip install -e .
+py -3.13 -m pip install -e ".[dev]"
 ```
 
 If you want to run Playwright-backed browser checks:
@@ -29,6 +28,7 @@ py -3.13 -m playwright install chromium
 ## Before opening a PR
 
 - run `py -3.13 -m pytest -q`
+- run `py -3.13 -m build` when packaging or metadata changed
 - keep changes focused and easy to review
 - update README, examples, or roadmap when the change affects project behavior or direction
 - prefer small, composable improvements over large rewrites
@@ -50,3 +50,9 @@ Changes are especially welcome when they move the project toward:
 - better developer experience
 
 If you plan a larger architectural change, it is helpful to open an issue or a short design note first so the direction can be discussed before implementation.
+
+## Issues and discussions
+
+- use GitHub Discussions for roadmap ideas, usage feedback, and open-ended design questions
+- use Issues for reproducible bugs, narrowly scoped feature requests, or maintainer-tracked tasks
+- include run artifacts or `summary.json` details when reporting agent-loop failures

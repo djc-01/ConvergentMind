@@ -5,9 +5,30 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "convergentmind"
 version = "0.1.0"
-description = "A multimodal agent prototype for converging browser, camera, and planning intelligence"
+description = "A local-first research platform for browser-first multimodal agents"
 readme = "README.md"
 requires-python = ">=3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = [
+  "agent",
+  "browser-automation",
+  "computer-use",
+  "multimodal",
+  "openai",
+  "playwright",
+  "vision-language-model",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP :: Browsers",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
   "openai>=2.38.0",
   "playwright>=1.54.0",
@@ -17,8 +38,15 @@ dependencies = [
   "rich>=13.9.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/Chocologician/ConvergentMind"
+Repository = "https://github.com/Chocologician/ConvergentMind"
+Issues = "https://github.com/Chocologician/ConvergentMind/issues"
+Discussions = "https://github.com/Chocologician/ConvergentMind/discussions"
+
 [project.optional-dependencies]
 dev = [
+  "build>=1.2.2",
   "pytest>=8.3.0",
 ]
 
