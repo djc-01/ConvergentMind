@@ -16,7 +16,7 @@ ConvergentMind is a small, hackable, local-first research platform for browser-f
 
 The project is intentionally lightweight, but it is built to be extended, tested, and replayed like a real tool instead of a one-off demo.
 
-## 30-second value
+## value
 
 ConvergentMind is useful if you are:
 
